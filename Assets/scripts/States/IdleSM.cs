@@ -23,4 +23,14 @@ public class IdleSM : BaseState
         stateMachine.ChangeState(((MovementSM)stateMachine).movingState);
     }
 
+    public override void UpdatePhysics()
+    {
+        base.UpdatePhysics();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
 }

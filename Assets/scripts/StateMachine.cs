@@ -22,17 +22,11 @@ public class StateMachine : MonoBehaviour
             currentState.UpdateLogic();
     }
 
-    void FixedUpdate()
-    {
-        print(currentState);
-    }
-
-
     void LateUpdate()
     {
         if (currentState != null)
             currentState.UpdatePhysics();
-        
+        print(currentState);
     }
 
     public void ChangeState(BaseState newState)

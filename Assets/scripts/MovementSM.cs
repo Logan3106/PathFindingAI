@@ -13,6 +13,8 @@ public class MovementSM : StateMachine
     public Rigidbody rb;
     public float dirX, dirY;
     public float speed;
+
+
     public void Awake()
     {
         idleState = new IdleSM(this);
@@ -26,7 +28,7 @@ public class MovementSM : StateMachine
 
     public void Update()
     {
-         dirX = Input.GetAxis("Horizontal") * speed;
+        dirX = Input.GetAxis("Horizontal") * speed;
         dirY = Input.GetAxis("Vertical") * speed;
     }
 

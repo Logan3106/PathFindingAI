@@ -6,7 +6,7 @@ public class Moving : BaseState
 {
     private float _verticalInput;
     private float _horizontalInput;
-    public Moving(MovementSM stateMachine) : base("idle", stateMachine) { }
+    public Moving(MovementSM stateMachine) : base("moving", stateMachine) { }
     public override void Enter()
     {
         base.Enter();
@@ -22,4 +22,13 @@ public class Moving : BaseState
         stateMachine.ChangeState(((MovementSM)stateMachine).idleState);
     }
 
+    public override void UpdatePhysics()
+    {
+        base.UpdatePhysics();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }
