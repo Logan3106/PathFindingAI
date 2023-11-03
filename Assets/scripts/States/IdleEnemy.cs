@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleSM : State
+public class IdleEnemy : State
 {
-    public IdleSM(PlayerScript player, StateMachine sm) : base(player, sm)
+    public IdleEnemy(EnemyScript enemy, StateMachine sm) : base(enemy, sm)
     {
     }
+
     public override void Enter()
     {
         base.Enter();
-
-        ps.rb.velocity = new Vector3(0, 0, 0);
     }
 
     public override void Exit()
@@ -27,12 +26,12 @@ public class IdleSM : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        ps.CheckForMoveInput();
+
+        gs.CheckForHunt();
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
     }
 }

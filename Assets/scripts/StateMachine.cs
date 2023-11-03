@@ -1,52 +1,36 @@
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+
 
 public class StateMachine : MonoBehaviour
 {
-    BaseState currentState;
+    public State CurrentState { get; private set; }
+    public State LastState { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Init(State startingState)
     {
-        currentState = GetInitialState();
-        if (currentState != null)
-            currentState.Enter();
+        CurrentState = startingState;
+        LastState = null;
+        startingState.Enter();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeState(State newState)
     {
-        if (currentState != null)
-            currentState.UpdateLogic();
+        //Debug.Log("Changing state to " + newState);
+        CurrentState.Exit();
+
+        LastState = CurrentState;
+        CurrentState = newState;
+        newState.Enter();
+
     }
 
-    void LateUpdate()
+    public State GetState()
     {
-        if (currentState != null)
-            currentState.UpdatePhysics();
-        print(currentState);
+        return CurrentState;
     }
-
-    public void ChangeState(BaseState newState)
-    {
-        currentState.Exit();
-
-        currentState = newState;
-        currentState.Enter();
-    }
-
-    protected virtual BaseState GetInitialState()
-    {
-        return null;
-    }
-
-
-    /*private void OnGUI()
-    {
-        string content = currentState != null ? currentState.name : "(no current state)";
-        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
-    }
-    */
 }
